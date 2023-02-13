@@ -149,7 +149,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129002467}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e9c551516e7c172439e32f734383774c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -643,5 +643,5 @@ MonoBehaviour:
   target: {fileID: 1127967668}
   shootPoint: {fileID: 173019712}
   vecMousePos: {x: 0, y: 0, z: 0}
-  fTime: 1
+  fTime: 2
   fRat: 0.5
