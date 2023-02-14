@@ -636,12 +636,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687602337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257e5be36700881478da3617def19a0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f1db6b96517ff541869fe3c8688f102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 6082197391132952876, guid: 028303f3bd33d91429763129becfd314, type: 3}
+  prefabBullet: {fileID: 6082197391132952876, guid: cb21da57e4dbcf343aa22e1637bb4c8b, type: 3}
   target: {fileID: 1127967668}
   shootPoint: {fileID: 173019712}
   vecMousePos: {x: 0, y: 0, z: 0}
-  fTime: 3
-  fRat: 0.255
+  fTime: 2
+  fRat: 0.5

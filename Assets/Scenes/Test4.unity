@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 1687602341}
   - component: {fileID: 1687602340}
   - component: {fileID: 1687602339}
-  - component: {fileID: 1687602342}
+  - component: {fileID: 1687602343}
   - component: {fileID: 1687602338}
   m_Layer: 0
   m_Name: Player
@@ -627,7 +627,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1687602342
+--- !u!114 &1687602343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -636,12 +636,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687602337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257e5be36700881478da3617def19a0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 315c57561e7c7864f9f17b89b02afafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 6082197391132952876, guid: 028303f3bd33d91429763129becfd314, type: 3}
+  prefabBullet: {fileID: 6082197391132952876, guid: 937f0968d8deb2d46b8112e286e15b90, type: 3}
   target: {fileID: 1127967668}
   shootPoint: {fileID: 173019712}
   vecMousePos: {x: 0, y: 0, z: 0}
-  fTime: 3
-  fRat: 0.255
+  fTime: 2
+  fRat: 0.5

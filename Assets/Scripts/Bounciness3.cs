@@ -1,89 +1,57 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class Trajectory : MonoBehaviour
+
+public class Bounciness3 : MonoBehaviour
 {
-    //Camera cam;
-    public GameObject prefabBullet;
-    public Transform target;
-    public Transform shootPoint;
+    public Vector3 vecEndPos;
+    bool OnBounce=false;
+
 
     public List<List<Vector3>> listResultVectors = new List<List<Vector3>>();
 
-    private void Update()
+    // Start is called before the first frame update
+    void Start()
     {
-        MouseRay();
-        target.position = vecMousePos;
-        //cam = Camera.main;
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("LaucherProjecttile");
-            LaucherProjecttile();
-        }
+
     }
 
-    enum E_RESERT_TYPE { ORIGIN, TARGET, DIST, S, VELOCITY, RESULT }
-
-    private void OnDrawGizmos()
+    // Update is called once per frame
+    void Update()
     {
-        for (int y = 0; y < listResultVectors.Count; y++)
-        {
-            List<Vector3> listVectors = listResultVectors[y];
-
-            Vector3 vPos = listVectors[(int)E_RESERT_TYPE.ORIGIN];
-            Vector3 vTarget = listVectors[(int)E_RESERT_TYPE.TARGET];
-            Vector3 vDist = listVectors[(int)E_RESERT_TYPE.DIST];
-            Vector3 vS = listVectors[(int)E_RESERT_TYPE.S];
-            Vector3 vVelocty = listVectors[(int)E_RESERT_TYPE.VELOCITY];
-            Vector3 vResult = listVectors[(int)E_RESERT_TYPE.RESULT];
-
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(vPos, 1);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(vTarget, 1);
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(vPos, vPos + vDist);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(vPos, vPos + vS);
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(vPos, vVelocty);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(vPos, vPos + vResult);
-        }
-        
+        //Debug.DrawLine(this.transform.position,vecReflect);
     }
 
-    #region 마우스 좌표
-    public Vector3 vecMousePos;
 
-
-    void MouseRay()
+    private void OnCollisionEnter(Collision collision)
     {
-        RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        int m_nLayerMask = 1<<LayerMask.NameToLayer("Floor");
-
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_nLayerMask))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
-            vecMousePos = new Vector3(hit.point.x, hit.point.y+0.5f, hit.point.z);
+            Rigidbody rig = GetComponent<Rigidbody>();
+            if (OnBounce)
+            {
+                rig.velocity = Vector3.zero;
+            }
+            else
+            {
+                LaucherProjecttile();
+                OnBounce = true;
+            }
 
         }
+
+
     }
 
-    #endregion
+
 
     #region 역탄도
 
     void LaucherProjecttile()
     {
         //Vector3 Vo = CalculateVelcoity(target.position, transform.position, 1f);
-        Vector3 Vo = CalculateVelcoityVector(vecMousePos, shootPoint.transform.position, fTime);
-        GameObject obj = Instantiate(prefabBullet, shootPoint.position, Quaternion.identity);
-        Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
+        Vector3 Vo = CalculateVelcoityVector(vecEndPos, this.transform.position, fTime);
+        Rigidbody rigidbody = this.GetComponent<Rigidbody>();
         rigidbody.velocity = Vo;
         //rigidbody.AddForce(Vo);
         //setTrajectoryPoints(transform.position, Vo);
@@ -153,7 +121,7 @@ public class Trajectory : MonoBehaviour
 
     void DrawPath(Vector3 velocity)
     {
-        Vector3 previousDrawPoint = shootPoint.transform.position;
+        Vector3 previousDrawPoint = this.transform.position;
         int resolution = 30;
         //lineRenderer.positionCount = resolution;
         for (int i = 1; i <= resolution; i++)
@@ -162,7 +130,7 @@ public class Trajectory : MonoBehaviour
             float simulationTime = i / (float)resolution * fTime;
 
             Vector3 displacement = velocity * simulationTime + Vector3.up * Physics.gravity.y * simulationTime * simulationTime / 2f;
-            Vector3 drawPoint = shootPoint.transform.position + displacement;
+            Vector3 drawPoint = this.transform.position + displacement;
             //DebugExtension.DebugPoint(drawPoint, 1, 1000f);//유니티 에셋스토어 Debug Extension
             Debug.DrawLine(previousDrawPoint, drawPoint, Color.green);
             //lineRenderer.SetPosition(i - 1, drawPoint);
@@ -172,9 +140,7 @@ public class Trajectory : MonoBehaviour
 
     #endregion
 
-    #region 반발력
 
 
 
-    #endregion
 }
