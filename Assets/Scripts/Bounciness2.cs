@@ -33,10 +33,15 @@ public class Bounciness2 : MonoBehaviour
             }
             else
             {
+                //Vector3 vecIn = vecIncidence.normalized;
+
                 vecReflect = Vector3.Reflect(vecIncidence, Vector3.up);
 
+                Vector3 vecRef = vecReflect.normalized;
+                //vecRef.x = vecRef.x *
+
                 //rig.AddForce(vecReflect*10f);
-                rig.velocity = vecReflect*(0.575f);
+                rig.velocity = vecReflect;
                 OnBounce = true;
             }
 

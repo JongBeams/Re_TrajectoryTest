@@ -83,7 +83,8 @@ public class Trajectory2 : MonoBehaviour
         //Vector3 Vo = CalculateVelcoity(target.position, transform.position, 1f);
         Vector3 Vo = CalculateVelcoityVector(vecMousePos, shootPoint.transform.position, fTime);
         GameObject obj = Instantiate(prefabBullet, shootPoint.position, Quaternion.identity);
-        Vector3 vecRe = new Vector3((shootPoint.position.x + vecMousePos.x) / 6f, (fRat * Mathf.Abs(Physics.gravity.y) * fTime) * (2f/3f), (shootPoint.position.z + vecMousePos.z) / 6f);
+        Vector3 vecRe = new Vector3((shootPoint.position.x + vecMousePos.x) / 2f,
+            (fRat * Mathf.Abs(Physics.gravity.y) * fTime), (shootPoint.position.z + vecMousePos.z) / 2f);
         obj.GetComponent<Bounciness2>().vecIncidence = vecMousePos - (vecRe);
         Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
         rigidbody.velocity = Vo;

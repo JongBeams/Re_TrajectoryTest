@@ -8,12 +8,13 @@ public class Bounciness : MonoBehaviour
 
     public Vector3 vecIncidence;
     public Vector3 vecReflect;
-    bool OnBounce;
+    bool OnBounce=false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,12 +32,11 @@ public class Bounciness : MonoBehaviour
             if (OnBounce)
             {
                 rig.velocity=Vector3.zero;
+                Destroy(this.gameObject,3f);
             }
             else
             {
                 vecReflect = Vector3.Reflect(vecIncidence, Vector3.up);
-                
-                //rig.AddForce(vecReflect*10f);
                 rig.velocity = vecReflect;
                 OnBounce = true;
             }

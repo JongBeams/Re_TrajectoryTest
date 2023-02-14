@@ -83,7 +83,8 @@ public class Trajectory : MonoBehaviour
         //Vector3 Vo = CalculateVelcoity(target.position, transform.position, 1f);
         Vector3 Vo = CalculateVelcoityVector(vecMousePos, shootPoint.transform.position, fTime);
         GameObject obj = Instantiate(prefabBullet, shootPoint.position, Quaternion.identity);
-        Vector3 vecRe = new Vector3((shootPoint.position.x +vecMousePos.x)/2, (fRat * Mathf.Abs(Physics.gravity.y) * fTime)*0.66f, (shootPoint.position.z + vecMousePos.z) / 2); 
+        Vector3 vecRe = new Vector3((shootPoint.position.x +vecMousePos.x)/2,
+            (fRat * Mathf.Abs(Physics.gravity.y) * fTime)*0.66f, (shootPoint.position.z + vecMousePos.z) / 2); 
         obj.GetComponent<Bounciness>().vecIncidence = vecMousePos - (vecRe);
         Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
         rigidbody.velocity = Vo;
@@ -126,8 +127,6 @@ public class Trajectory : MonoBehaviour
         //사용하지않을시 높이차이에 의한 높이 게임만들기
         Vector3 vDistXZ = vDist; vDistXZ.y = 0; //y축이 영향을 주지않도록 제거한 벡터
         //s벡터를 이용하지않으면 1사분면으로만 날아감 -> 여기에서 속도값을 양수화하지않으면 곱으로 인해 속도계산시 항상 양수가된다.
-        //float fDistX = Mathf.Sqrt(vDist.x * vDist.x);
-        //Vector3 vS = new Vector3(Mathf.Abs(vDistXZ.x), vDist.y, Math.Abs(vDistXZ.z)); //bule
         Vector3 vS = new Vector3(vDistXZ.magnitude, vDist.y, vDistXZ.magnitude); //bule
         Vector3 vVelocity = vS / time;// 속력
         //시간당 중력에 따른거리계산. 최대높이값이 중간지점이므로 중력의 절반을 구한다. 시간이 클수록 사각이 늘어난다.
