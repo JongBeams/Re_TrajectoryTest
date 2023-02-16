@@ -86,6 +86,7 @@ public class Trajectory2 : MonoBehaviour
         Vector3 vecRe = new Vector3((shootPoint.position.x + vecMousePos.x) / 2f,
             (fRat * Mathf.Abs(Physics.gravity.y) * fTime), (shootPoint.position.z + vecMousePos.z) / 2f);
         obj.GetComponent<Bounciness2>().vecIncidence = vecMousePos - (vecRe);
+        obj.GetComponent<Bounciness2>().vecEndPos = vecMousePos;
         Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
         rigidbody.velocity = Vo;
         //rigidbody.AddForce(Vo);

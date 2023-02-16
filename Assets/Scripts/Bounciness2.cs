@@ -6,6 +6,7 @@ public class Bounciness2 : MonoBehaviour
 {
 
     public Vector3 vecIncidence;
+    public Vector3 vecEndPos;
     public Vector3 vecReflect;
     bool OnBounce=false;
 
@@ -38,11 +39,12 @@ public class Bounciness2 : MonoBehaviour
                 vecReflect = Vector3.Reflect(vecIncidence, Vector3.up);
 
                 Vector3 vecRef = vecReflect.normalized;
-                //vecRef.x = vecRef.x *
 
-                //rig.AddForce(vecReflect*10f);
-                rig.velocity = vecReflect;
+                float b = vecReflect.magnitude*(0.6f);
+
+                rig.velocity = vecRef * b;
                 OnBounce = true;
+
             }
 
         }
